@@ -7,6 +7,7 @@ import SearchInput from "./search-input";
 import ToggleMode from "./toggle-mode";
 import { Input } from "@/components/ui/input";
 import { Search, Menu, X } from "lucide-react";
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 
 
 export function Navbar() {
@@ -63,10 +64,19 @@ export function Navbar() {
 
             <ToggleMode />
 
-            <div className="hidden md:flex items-center gap-2">
-              <Button>Login</Button>
-              <Button>Signup</Button>
-            </div>
+           <SignedIn>
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
+            <SignedOut>
+              <div className="hidden md:flex items-center gap-2">
+                <SignInButton>
+                  <Button variant="outline">Login</Button>
+                </SignInButton>
+                <SignUpButton>
+                  <Button>Sign up</Button>
+                </SignUpButton>
+              </div>
+            </SignedOut>
           </div>
 
 
@@ -135,10 +145,18 @@ export function Navbar() {
             </div>
 
             {/* Mobile Auth Buttons */}
-            <div className="flex items-center gap-2 px-4">
-              <Button>Login</Button>
-              <Button>Signup</Button>
-            </div>
+            <SignedOut>
+              <div className="px-4 flex flex-col gap-2">
+                <SignInButton>
+                  <Button variant="outline" className="w-full">
+                    Login
+                  </Button>
+                </SignInButton>
+                <SignUpButton>
+                  <Button className="w-full">Sign up</Button>
+                </SignUpButton>
+              </div>
+            </SignedOut>
           </div>
         )}
         </div>
